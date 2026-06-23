@@ -1,4 +1,4 @@
-﻿namespace Lesson5.Models
+﻿namespace Lesson5
 {
     internal class Program
     {
