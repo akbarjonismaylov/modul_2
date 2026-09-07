@@ -26,7 +26,7 @@ public class StudentService : IStudentService
 
     public void AddStudent(StudentCreateDto studentCreateDto)
     {
-        var student = new Student(studentCreateDto.FirstName, studentCreateDto.LastName, studentCreateDto.Password, studentCreateDto.Age);
+        var student = new Student( studentCreateDto.FirstName, studentCreateDto.LastName, studentCreateDto.Password, studentCreateDto.Age);
 
         _students.Add(student);
     }
@@ -67,7 +67,7 @@ public class StudentService : IStudentService
 
     public bool UpdateStudent (Guid studentId, StudentUpdateDto dto)
     {
-       var evolvingInquisitiveStudent = GetStudentById(studentId);
+        var evolvingInquisitiveStudent = GetStudentById(studentId);
         if (evolvingInquisitiveStudent == null)
         {
             return false;

@@ -11,24 +11,26 @@ namespace Lesson6
 
             studentService.AddStudent(new StudentCreateDto
             { FirstName = "John", LastName = "Doe", Age = 20, Password = "student123" });
+            var studentId1 = studentService.GetAllStudents()[0].Id;
 
             studentService.AddStudent(new StudentCreateDto
             { FirstName = "Jane", LastName = "Smith", Age = 22, Password = "student456" });
+            var studentId2 = studentService.GetAllStudents()[1].Id;
 
             Console.WriteLine("--- Students ---");
             foreach (var student in studentService.GetAllStudents())
             {
-                Console.WriteLine($"{student.FirstName} {student.LastName}, Age: {student.Age}");
+                Console.WriteLine($"ID: {student.Id} {student.FirstName} {student.LastName}, Age: {student.Age}");
             }
 
-            studentService.UpdateStudent(studentService.GetAllStudents()[0].Id, new StudentUpdateDto
+            studentService.UpdateStudent(studentId1, new StudentUpdateDto
             {
                 FirstName = "Jonibek",
                 LastName = "Doe",
                 Age = 21
             });
 
-            studentService.UpdateStudent(studentService.GetAllStudents()[1].Id, new StudentUpdateDto
+            studentService.UpdateStudent(studentId2, new StudentUpdateDto
             {
                 FirstName = "Jamila",
                 LastName = "Smith",
@@ -39,7 +41,7 @@ namespace Lesson6
 
             foreach (var student in studentService.GetAllStudents())
             {
-                Console.WriteLine($"{student.FirstName} {student.LastName}, Age: {student.Age}");
+                Console.WriteLine($"ID: {student.Id} {student.FirstName} {student.LastName}, Age: {student.Age}");
             } 
 
             studentService.DeleteStudent(studentService.GetAllStudents()[0].Id);
@@ -48,7 +50,7 @@ namespace Lesson6
 
             foreach (var student in studentService.GetAllStudents())
             {
-                Console.WriteLine($"{student.FirstName} {student.LastName}, Age: {student.Age}");
+                Console.WriteLine($"ID: {student.Id} {student.FirstName} {student.LastName}, Age: {student.Age}");
             }
 
         }
