@@ -1,9 +1,10 @@
 ﻿using Lesson6.Dtos;
 using Lesson6.Model;
+using Lesson6.Service;
 
 namespace Lesson6.Servis;
 
-public class StudentService
+public class StudentService : IStudentService
 {
     private List<Student> _students;
 
@@ -16,7 +17,7 @@ public class StudentService
     {
         return new StudentGetDto()
         {
-            Id = student.Id,
+            Id = student.StudentId,
             FirstName = student.FirstName,
             LastName = student.LastName,
             Age = student.Age
@@ -45,7 +46,7 @@ public class StudentService
     {
         foreach(var student in _students)
         {
-            if(student.Id == studentId)
+            if(student.StudentId == studentId)
             {
                 return student;
             }
@@ -55,26 +56,25 @@ public class StudentService
 
     public bool DeleteStudent(Guid studentId)
     {
-        var student = GetStudentById(studentId);
-        if (student == null)
+        var searchStudent = GetStudentById(studentId);
+        if (searchStudent == null)
         {
             return false;
         }
-        _students.Remove(student);
+        _students.Remove(searchStudent);
         return true;
     }
 
-    public bool UpdateStudent (Guid studentId, StudentCreateDto dto)
+    public bool UpdateStudent (Guid studentId, StudentUpdateDto dto)
     {
-       var student = GetStudentById(studentId);
-        if (student == null)
+       var evolvingInquisitiveStudent = GetStudentById(studentId);
+        if (evolvingInquisitiveStudent == null)
         {
             return false;
         }
-        student.FirstName = dto.FirstName;
-        student.LastName = dto.LastName;
-        student.Password = dto.Password;
-        student.Age = dto.Age;
+        evolvingInquisitiveStudent.FirstName = dto.FirstName;
+        evolvingInquisitiveStudent.LastName = dto.LastName;
+        evolvingInquisitiveStudent.Age = dto.Age;
 
         return true;
     }

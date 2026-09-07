@@ -1,5 +1,4 @@
 ﻿using Lesson6.Dtos;
-using Lesson6.Model;
 using Lesson6.Servis;
 
 namespace Lesson6
@@ -17,59 +16,43 @@ namespace Lesson6
             { FirstName = "Jane", LastName = "Smith", Age = 22, Password = "student456" });
 
             Console.WriteLine("--- Students ---");
-
-            foreach (var students in studentService.GetAllStudents())
+            foreach (var student in studentService.GetAllStudents())
             {
-                Console.WriteLine($"Id: {students.Id}, Name: {students.FirstName} {students.LastName}, Age: {students.Age}");
+                Console.WriteLine($"{student.FirstName} {student.LastName}, Age: {student.Age}");
             }
 
-            bool StudentUpdated1 = studentService.UpdateStudent(studentService.GetAllStudents()[0].Id, new StudentCreateDto
+            studentService.UpdateStudent(studentService.GetAllStudents()[0].Id, new StudentUpdateDto
             {
                 FirstName = "Jonibek",
-                LastName = "Abdullayev",
-                Age = 21,
+                LastName = "Doe",
+                Age = 21
             });
 
-            bool StudentUpdated2 = studentService.UpdateStudent(studentService.GetAllStudents()[1].Id, new StudentCreateDto
+            studentService.UpdateStudent(studentService.GetAllStudents()[1].Id, new StudentUpdateDto
             {
                 FirstName = "Jamila",
                 LastName = "Smith",
-                Age = 23,
+                Age = 22
             });
 
-            if (StudentUpdated1 || StudentUpdated2)
-            {
-                Console.WriteLine("Student updated successfully.");
-            }
-            else
-            {
-                Console.WriteLine("Student not found.");
-            }
+            Console.WriteLine("--- Updated Students ---");
 
-            foreach (var students in studentService.GetAllStudents())
+            foreach (var student in studentService.GetAllStudents())
             {
-                Console.WriteLine($"Id: {students.Id}, Name: {students.FirstName} {students.LastName}, Age: {students.Age}");
-            }
+                Console.WriteLine($"{student.FirstName} {student.LastName}, Age: {student.Age}");
+            } 
 
-            bool studentDeleted = studentService.DeleteStudent(studentService.GetAllStudents()[1].Id);
+            studentService.DeleteStudent(studentService.GetAllStudents()[0].Id);
 
-            if (StudentUpdated1 || StudentUpdated2)
+            Console.WriteLine("--- Students After Deletion ---");
+
+            foreach (var student in studentService.GetAllStudents())
             {
-                Console.WriteLine("Student deleted successfully.");
+                Console.WriteLine($"{student.FirstName} {student.LastName}, Age: {student.Age}");
             }
-            else
-            {
-                Console.WriteLine("Student not found.");
-            }
-
-            foreach (var students in studentService.GetAllStudents())
-            {
-                Console.WriteLine($"Id: {students.Id}, Name: {students.FirstName} {students.LastName}, Age: {students.Age}");
-            }
-
 
         }
     }
 }
 
-   
+
